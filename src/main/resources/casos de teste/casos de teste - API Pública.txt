@@ -1,0 +1,145 @@
+FUNCIONALIDADE: Manter Usuários
+
+DADO:
+	A API GoRest esteja disponível
+
+CENÁRIO DE TESTE 1: Criar Usuário
+QUANDO:	
+	Especifico os dados da request
+	E preencho o body request
+	Envio uma requisição POST na rota '/users'
+ENTÃO:
+	Verifico se o usuário foi incluído com sucesso
+	E valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 201 recebidos
+	
+
+CENÁRIO DE TESTE 2: Criar Usuário
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro
+	Envio uma requisição GET na rota '/users'
+ENTÃO:
+	Verifico o body do response
+	E valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 200 recebidos
+	
+	
+CENÁRIO DE TESTE 3: Alterar Usuário
+QUANDO:
+	Especifico os dados da request
+	E preencho o body request
+	Envio uma requisição PUT na rota '/users'
+ENTÃO:
+	Verifico o body do response
+	E valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 200 recebidos
+	
+	
+CENÁRIO DE TESTE 4: Deletar Usuário
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro
+	Envio uma requisição DELETE na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 204 recebidos
+	
+	
+CENÁRIO DE TESTE 5: Criar Usuário Sem Autenticação
+QUANDO:
+	Especifico os dados da request sem passar o access-token no HEADER
+	E preencho o body request
+	Envio uma requisição POST na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 401 recebidos
+	E valido a mensagem recebida no body
+	
+
+CENÁRIO DE TESTE 6: Criar Usuário Sem Campos Obrigatórios
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição POST na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 422 recebidos
+	E valido as mensagens recebidas no body
+	
+
+CENÁRIO DE TESTE 7: Criar Usuário Com E-mail Já Cadastrado
+QUANDO:
+	Especifico os dados da request
+	E preencho o body request com um e-mail já existente
+	Envio uma requisição POST na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 422 recebidos
+	E valido a mensagem recebida no body
+	
+	
+CENÁRIO DE TESTE 8: Consultar Usuário Inexistente
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro de pesquisa com um usuário inexistente
+	Envio uma requisição GET na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 404 recebidos
+	E valido a mensagem recebida no body
+	
+	
+CENÁRIO DE TESTE 9: Alterar Usuário Inexistente
+QUANDO:
+	Especifico os dados da request
+	E defino body request com um usuário inexistente
+	Envio uma requisição PUT na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 404 recebidos
+	E valido a mensagem recebida no body
+	
+	
+CENÁRIO DE TESTE 10: Alterar Usuário Sem Campos Obrigatórios
+QUANDO:
+	Especifico os dados da request
+	E defino body request com um usuário inexistente
+	Envio uma requisição PUT na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 422 recebidos
+	E valido as mensagens recebidas no body
+	
+	
+CENÁRIO DE TESTE 11: Deletar Usuário Inexistente
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro com um usuário inexistente
+	Envio uma requisição DELETE na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 404 recebidos
+	E valido a mensagem recebida no body
+	
+	
+CENÁRIO DE TESTE 12: Criar Usuário Com Token Inválido
+QUANDO:
+	Especifico os dados da request passando um access-token inválido no HEADER
+	E defino o body request
+	Envio uma requisição POST na rota '/users'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 e Code 401 recebidos
+	E valido a mensagem recebida no body

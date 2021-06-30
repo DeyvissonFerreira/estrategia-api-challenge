@@ -1,0 +1,197 @@
+FUNCIONALIDADE: Registrar Usuário
+
+DADO:
+	A API Estratégia esteja disponível
+
+CENÁRIO DE TESTE 1: Registrar Usuário
+QUANDO:	
+	Especifico os dados da request
+	E preencho o body request
+	Envio uma requisição POST na rota '/auth/register'
+ENTÃO:
+	Verifico se o usuário foi registrado com sucesso
+	E valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 201 recebido
+	
+
+CENÁRIO DE TESTE 2: Registrar Usuário Sem Campos Obrigatórios
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição POST na rota '/auth/register'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 422 recebido
+	E valido a mensagem recebida no body
+	
+	
+FUNCIONALIDADE: Autenticar Usuário
+	
+
+CENÁRIO DE TESTE 1: Autenticar Usuário
+QUANDO:
+	Especifico os dados da request
+	E preencho o body request
+	Envio uma requisição POST na rota '/auth/authenticate'
+ENTÃO:
+	Valido a especificação do response
+	E valido o body do response
+	E valido o JsonSchema
+	E valido o StatusCode 201 recebido
+	
+	
+CENÁRIO DE TESTE 2: Autenticar Usuário com Dados Inválidos
+QUANDO:
+	Especifico os dados da request
+	E preencho o body request com dados inválidos
+	Envio uma requisição POST na rota '/auth/authenticate'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 401 recebido
+	
+	
+FUNCIONALIDADE: Manter Projeto
+
+	
+CENÁRIO DE TESTE 1: Criar Projeto
+QUANDO:
+	Especifico os dados da request
+	E defino body request
+	Envio uma requisição POST na rota '/projects'
+ENTÃO:
+	Valido a especificação do response
+	E valido o body do response
+	E valido o JsonSchema
+	E valido o StatusCode 201 recebido
+	
+	
+CENÁRIO DE TESTE 2: Criar Projeto Sem Campos Obrigatórios
+QUANDO:
+	Especifico os dados da request
+	E defino body request
+	Envio uma requisição POST na rota '/projects'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 422 recebido
+	
+	
+CENÁRIO DE TESTE 3: Criar Projeto Sem Autenticação
+QUANDO:
+	Especifico os dados da request sem passar o access-token no HEADER
+	E defino body request
+	Envio uma requisição POST na rota '/projects'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 401 recebido
+	
+	
+CENÁRIO DE TESTE 4: Consultar Projeto
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro de pesquisa
+	Envio uma requisição GET na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o body do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 recebido
+	
+	
+CENÁRIO DE TESTE 5: Consultar Todos Projetos
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição GET na rota '/projects'
+ENTÃO:
+	Valido a especificação do response
+	E valido o body do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 recebido
+	
+	
+CENÁRIO DE TESTE 6: Consultar Projetos Sem Autenticação
+QUANDO:
+	Especifico os dados da request sem passar o access-token no HEADER
+	Envio uma requisição GET na rota '/projects'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 401 recebido
+	
+
+CENÁRIO DE TESTE 7: Consultar Projeto Inexistente
+QUANDO:
+	Especifico os dados da request
+	E defino o parâmetro de pesquisa
+	Envio uma requisição GET na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 404 recebido
+	
+	
+CENÁRIO DE TESTE 8: Alterar Projeto
+QUANDO:
+	Especifico os dados da request
+	E preencho o body request
+	Envio uma requisição PUT na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o body do response
+	E valido o JsonSchema
+	E valido o StatusCode 200 recebido
+	
+	
+CENÁRIO DE TESTE 9: Alterar Projeto Sem Campos Obrigatórios
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição PUT na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 422 recebido
+	E valido a mensagem recebida no body
+	
+	
+CENÁRIO DE TESTE 10: Alterar Projeto Sem Autenticação
+QUANDO:
+	Especifico os dados da request sem passar o access-token no HEADER
+	Envio uma requisição PUT na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 401 recebido
+	
+	
+CENÁRIO DE TESTE 11: Alterar Projeto Inexistente
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição PUT na rota '/projects/:projectID' com um ID inexistente
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 404 recebido
+	
+	
+CENÁRIO DE TESTE 12: Deletar Projeto
+QUANDO:
+	Especifico os dados da request
+	Defino o parâmetro
+	Envio uma requisição DELETE na rota '/projects/:projectID'
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 204 recebido
+	
+	
+CENÁRIO DE TESTE 13: Deletar Projeto Inexistente
+QUANDO:
+	Especifico os dados da request
+	Envio uma requisição DELETE na rota '/projects/:projectID' com um ID inexistente
+ENTÃO:
+	Valido a especificação do response
+	E valido o JsonSchema
+	E valido o StatusCode 404 recebido
