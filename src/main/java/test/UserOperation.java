@@ -25,25 +25,25 @@ public class UserOperation extends BaseConfig{
 		user = gerarUsuarioRandomico();
 	}
 	
-//	@Test
-//	public void CEN01_criarUsuario() {
-//		
-//		ExtractableResponse<Response> response = 
-//		given()
-//			.spec(requestSpec)
-//			.body(user)
-//		.when()
-//			.post("/users")
-//		.then()
-//			.spec(responseSpec)
-//			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersCreat.json"))
-//			.body("code", is(HttpStatus.SC_CREATED))
-//			.extract();
-//		
-//		user.id = response.path("data.id");
-//		user.created_at = response.path("data.created_at");
-//		user.updated_at = response.path("data.updated_at");
-//	}
+	@Test
+	public void CEN01_criarUsuario() {
+		
+		ExtractableResponse<Response> response = 
+		given()
+			.spec(requestSpec)
+			.body(user)
+		.when()
+			.post("/users")
+		.then()
+			.spec(responseSpec)
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersCreat.json"))
+			.body("code", is(HttpStatus.SC_CREATED))
+			.extract();
+		
+		user.id = response.path("data.id");
+		user.created_at = response.path("data.created_at");
+		user.updated_at = response.path("data.updated_at");
+	}
 //	
 //	@Test
 //	public void CEN02_consultarUsuario() {
