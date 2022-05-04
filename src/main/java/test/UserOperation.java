@@ -25,25 +25,25 @@ public class UserOperation extends BaseConfig{
 		user = gerarUsuarioRandomico();
 	}
 	
-//	@Test
-//	public void CEN01_criarUsuario() {
-//		
-//		ExtractableResponse<Response> response = 
-//		given()
-//			.spec(requestSpec)
-//			.body(user)
-//		.when()
-//			.post("/users")
-//		.then()
-//			.spec(responseSpec)
-//			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersCreat.json"))
-//			.body("code", is(HttpStatus.SC_CREATED))
-//			.extract();
-//		
-//		user.id = response.path("data.id");
-//		user.created_at = response.path("data.created_at");
-//		user.updated_at = response.path("data.updated_at");
-//	}
+	@Test
+	public void CEN01_criarUsuario() {
+		
+		ExtractableResponse<Response> response = 
+		given()
+			.spec(requestSpec)
+			.body(user)
+		.when()
+			.post("/users")
+		.then()
+			.spec(responseSpec)
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersCreat.json"))
+			.body("code", is(HttpStatus.SC_CREATED))
+			.extract();
+		
+		user.id = response.path("data.id");
+		user.created_at = response.path("data.created_at");
+		user.updated_at = response.path("data.updated_at");
+	}
 //	
 //	@Test
 //	public void CEN02_consultarUsuario() {
@@ -245,21 +245,22 @@ public class UserOperation extends BaseConfig{
 //			.body("data.message", is(Mensagens.USUARIO_NAO_ENCONTRADO.getMensagem()));
 //	}
 //	
-//	@Test
-//	public void CEN12_criarUsuarioComAutenticacaoInvalida() {
-//		given()
-//			.header("Authorization", "Bearer 987654321abcdefg")
-//			.spec(requestSpecUnauthorized)
-//			.body(user)
-//		.when()
-//			.post("/users")
-//		.then()
-//			.spec(responseSpec)
-//			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersAuth.json"))
-//			.body("code", is(HttpStatus.SC_UNAUTHORIZED))
-//			.body("data.message", is(Mensagens.AUTHENTICATION_FAILED.getMensagem()));
-//	}
-//	
+	@Test
+	public void CEN12_criarUsuarioComAutenticacaoInvalida() {
+		given()
+			.header("Authorization", "Bearer 987654321abcdefg")
+			.spec(requestSpecUnauthorized)
+			.body(user)
+		.when()
+			.post("/users")
+		.then()
+			.spec(responseSpec)
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersAuth.json"))
+			.body("code", is(HttpStatus.SC_UNAUTHORIZED))
+			.body("data.message", is(Mensagens.AUTHENTICATION_FAILED.getMensagem()));
+	}
+	
+	
 	
 	
 	private User gerarUsuarioRandomico() {
