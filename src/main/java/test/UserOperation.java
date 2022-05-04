@@ -245,21 +245,21 @@ public class UserOperation extends BaseConfig{
 //			.body("data.message", is(Mensagens.USUARIO_NAO_ENCONTRADO.getMensagem()));
 //	}
 //	
-//	@Test
-//	public void CEN12_criarUsuarioComAutenticacaoInvalida() {
-//		given()
-//			.header("Authorization", "Bearer 987654321abcdefg")
-//			.spec(requestSpecUnauthorized)
-//			.body(user)
-//		.when()
-//			.post("/users")
-//		.then()
-//			.spec(responseSpec)
-//			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersAuth.json"))
-//			.body("code", is(HttpStatus.SC_UNAUTHORIZED))
-//			.body("data.message", is(Mensagens.AUTHENTICATION_FAILED.getMensagem()));
-//	}
-//	
+	@Test
+	public void CEN12_criarUsuarioComAutenticacaoInvalida() {
+		given()
+			.header("Authorization", "Bearer 987654321abcdefg")
+			.spec(requestSpecUnauthorized)
+			.body(user)
+		.when()
+			.post("/users")
+		.then()
+			.spec(responseSpec)
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("usersAuth.json"))
+			.body("code", is(HttpStatus.SC_UNAUTHORIZED))
+			.body("data.message", is(Mensagens.AUTHENTICATION_FAILED.getMensagem()));
+	}
+	
 	
 	
 	
