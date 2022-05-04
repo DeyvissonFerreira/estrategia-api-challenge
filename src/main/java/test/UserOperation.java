@@ -262,6 +262,7 @@ public class UserOperation extends BaseConfig{
 //	
 	
 	
+	
 	private User gerarUsuarioRandomico() {
 		Faker usuario = new Faker();
 		return new User(usuario.lordOfTheRings().character(), usuario.internet().emailAddress(), usuario.demographic().sex(), "Active");
